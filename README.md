@@ -59,4 +59,5 @@ Make sure to
 
 ## Create a Tomcat task
 
-
+1. Create a task definition from `tomcat.json`
+2. Create a service to run the task

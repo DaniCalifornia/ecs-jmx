@@ -1,0 +1,52 @@
+{
+    "family": "tomcat-jmx",
+    "containerDefinitions": [
+        {
+            "name": "tomcat",
+            "image": "tomcat:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "tomcat-9012-tcp",
+                    "containerPort": 9012,
+                    "hostPort": 0,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "JAVA_OPTS",
+                    "value": "-Xms256m -Xmx6144m -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.port=9012 -Dcom.sun.management.jmxremote.rmi.port=9012 -Djava.rmi.server.hostname=$(hostname -i)"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "dockerLabels": {
+                "com.datadoghq.ad.check_names": "[\"tomcat\"]",
+                "com.datadoghq.ad.init_configs": "[{\"is_jmx\": true,\"collect_default_metrics\": true}]",
+                "com.datadoghq.ad.instances": "[{\"host\": \"%%host%%\",\"port\": 9012}]"
+            },
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/tomcat-jmx",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "executionRoleArn": "arn:aws:iam::061305462202:role/ecsTaskExecutionRole",
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    }
+}

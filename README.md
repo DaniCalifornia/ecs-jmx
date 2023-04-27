@@ -4,14 +4,14 @@ This sandbox goes over creating an ECS cluster and deploying a Datadog Agent con
 
 ## Pre-reqs
 
-1. Access to an AWS account (DD sandbox or personal)
-2. Install the AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html 
+Access to an AWS account (DD sandbox or personal)
 
 ## Creating an ECS cluster
 
 ### Step 1: Create an SSH key pair
 
 Create a key pair so you can SSH into your EC2 instances following these instructions: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html 
+
 Download the private key file to a super secret location (or Downloads if you're basic)
 
 ### Step 2: Create a new ECS cluster
@@ -27,6 +27,7 @@ Under the Infrastructure tab, configure the following
 6. SSH Key pair: set to the key pair you created in Step 1
 
 Click `Create` and you should see your cluster getting created with 2 EC2 instances
+
 You can go to the EC2 Instances page to view your instances and their status
 
 ### Step 3: Connect to your EC2 instance
@@ -51,6 +52,7 @@ CONTAINER ID   IMAGE                                     COMMAND                
 ## Run the Datadog Agent as a Daemon Service
 
 Follow this doc to deploy the Datadog Agent: https://docs.datadoghq.com/containers/amazon_ecs/?tab=webui
+
 Make sure to 
 1. set your API key
 2. use the latest JMX agent image - you can find an example task definition in the `jmx-agent.json` file
